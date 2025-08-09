@@ -2,16 +2,23 @@ import Joi from 'joi'
 import libphonenumber from 'google-libphonenumber'
 
 const checkPhone = (phone) => {
-  let phoneStr = `${phone}`
-  if (/^\+\d+ /.test(phoneStr)) {
-    phoneStr = phoneStr.replace(/^\+\d+ /, '')
-  }
+  let phoneStr = `${phone}`.trim()
+  // 支援 +852/+853，允許有無空白
+  phoneStr = phoneStr.replace(/^\+\d+\s?/, '')
   if (/^\d+$/.test(phoneStr)) {
     return true
   }
   const phoneUtil = libphonenumber.PhoneNumberUtil.getInstance()
-  const phoneNumber = phoneUtil.parseAndKeepRawInput(phoneStr, 'CN')
-  return phoneUtil.isValidNumber(phoneNumber)
+  const regions = ['HK', 'MO', 'CN']
+  for (const region of regions) {
+    try {
+      const phoneNumber = phoneUtil.parseAndKeepRawInput(`${phone}`, region)
+      if (phoneUtil.isValidNumber(phoneNumber)) {
+        return true
+      }
+    } catch {}
+  }
+  return false
 }
 
 const schema = Joi.object({

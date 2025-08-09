@@ -34,15 +34,15 @@ const archive = () => {
 
 const combine = () => {
   return gulp.src('temp/*/*.vcf')
-    .pipe(concatFolders('汇总'))
+    .pipe(concatFolders('匯總'))
     .pipe(rename({ extname: '.all.vcf' }))
     .pipe(gulp.dest('./temp'))
 }
 
 const allinone = () => {
-  return gulp.src('temp/汇总/*.all.vcf')
+  return gulp.src('temp/匯總/*.all.vcf')
     .pipe(concat('全部.vcf'))
-    .pipe(gulp.dest('./temp/汇总'))
+    .pipe(gulp.dest('./temp/匯總'))
 }
 
 const clean = () => {
