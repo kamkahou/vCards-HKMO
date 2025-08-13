@@ -6,7 +6,10 @@
     "build": "npm run gulp build",
     "radicale": "npm run gulp radicale",
     "gulp": "gulp --gulpfile src/gulpfile.js --cwd ./",
-    "test": "npx ava src/test.js"
+    "test": "npx ava src/test.js",
+    "images:resize": "node src/tools/resize-images.js",
+    "images:compress": "node src/tools/compress-images.js",
+    "test:assist": "node src/tools/test-assist.js"
   },
   "repository": "git@github.com:metowolf/vCards.git",
   "author": "metowolf <i@i-meto.com>",
@@ -28,6 +31,7 @@
     "pinyin-pro": "^3.26.0",
     "pretty-bytes": "^6.1.1",
     "read-chunk": "^4.0.3",
+    "sharp": "^0.33.4",
     "vcards-js": "^2.10.0"
   }
 }
