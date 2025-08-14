@@ -1,0 +1,10 @@
+version: "3.8"
+
+services:
+  vcards-hkmo:
+    image: ${VCARDS_IMAGE:-vcards-hkmo:latest}
+    container_name: vcards-hkmo
+    ports:
+      - "${HOST_PORT:-5232}:5232"
+    restart: unless-stopped
+
